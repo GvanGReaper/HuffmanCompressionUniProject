@@ -17,5 +17,3 @@ def success():
       f = request.files['file']
       decode_file_content(f)
       return render_template("success.html", name = f.filename)  
-
-
