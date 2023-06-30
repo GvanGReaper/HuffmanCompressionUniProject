@@ -1,0 +1,14 @@
+1.CREATE CLIENT & SERVER INTERFACE WITH FLASK
+
+2.CLIENT LOGIC: 
+    -Receive File as input
+    -Reads and compresses file with Huffman's algorithm
+    -Converts to binary representation
+    -Add padding
+    -Adds random error at X% of len(X is given from user and converted to base64)
+    -Sents JSON to server
+
+3.SERVER LOGIC:
+    -DECODES THE MESSAGE
+    -CHECKS THE AMOUNT OF ERRORS CORRECTED
+    -> to be continued
