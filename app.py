@@ -13,7 +13,8 @@ def main():
 def answers_submitted():
    if request.method == 'POST':
       data = request.form
-      print(data)
+            
+
    return render_template("success.html")
 
 
