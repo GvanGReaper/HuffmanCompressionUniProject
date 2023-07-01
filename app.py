@@ -19,7 +19,10 @@ def answers_submitted():
       char_list = []
       for ch in file_content:
          char_list.append(chr(ch))
-         
+      #------------------------------------------------------------------------------------------------
+      #CALL TO FUNCTION THAT WILL HANDLE THE ENCODING SIDE OF THINGS GOES HERE
+      #------------------------------------------------------------------------------------------------
+
    return render_template("success.html")
 
 
