@@ -7,13 +7,27 @@
         <h1>ENCODE YOUR FILES!(Kinda)</h1>
         <p>
             Have you ever wanted to encode a file,only to add an error to the encoded message to be sent to the server on purpose for some cruel joke?Now you CAN.
-            With the power of university student crunch time YOU can finally do exactly that,and get some interesting information back!All you have to do now is wait for the
-            encoded data that was sent from your client to be decoded and you shall receive the information you crave so much as output.Have fun!
+            With the power of university student crunch time YOU can finally do exactly that,and get some interesting information back!All you have to do now is add click that 
+            decode button and wait for the encoded data that was sent from your client to be decoded and you shall receive the information you crave so much as output.Have fun!
         </p>
-        <h4>NOTE: This little project uses the Huffman compression algorithm</h4>
+        <h4>NOTE: This little project uses the Huffman compression algorithm(Or so we believe)</h4>
+        <h4>EXTRA NOTE: Read the instructions below before clicking the decode button!</h4>
         <h5>And yes we do know this looks like shit we dont have the time nor the graphic design skills to fix this.</h5>
-        <p>
-            Please wait patiently while we are decoding your data! 
-        </p>
+        <h2>INSTRUCTIONS:</h2>
+        <ol>
+            <li><span id = "delete_this">Pray that this thing works</span></li>
+            <li>Select file you want to encode in form below.<span id = "delete_this">If you put anything but txt,we'll find out.</span></li>
+            <li>Give the lengh at which the errors shall appear(in %)</li>
+            <li>Click submit button</li>
+            <li>Wait patiently!</li>
+            <li>Thats all!<span id = "delete_this">Weep brethren,for GOD might know mercy,but HTML does NOT</span></li>
+        </ol>
+        <form action="{{ url_for("answers_submitted")}}" method="post">
+            <label for="fileName">File:</label><br>
+            <input type = "file" id="fileName" name = "fileName"><br>
+            <label for="x">X(in %):</label><br>
+            <input type="text" id="x" name="x"><br>
+            <input type="submit" value="Submit">
+        </form>
     </body>
 </html>

@@ -4,30 +4,18 @@ from decode import *
 app = Flask(__name__)
 
 
-
-from flask import render_template
-
-
-
-@app.errorhandler(404)
-def not_found(error):
-   return render_template('error.html'), 404
-
-
-@app.route('/')
+@app.route("/",methods=['POST','GET'])
 def main():
-   return render_template('index.html')
+   return render_template("index.html")
 
 
-@app.route('/success',methods = ['GET'])
-def success():
-   response = make_response(render_template('success.html'),200)
-   return response
-
-@app.route('/sending',methods = ['POST','GET'])
-def jsonReceived():
+@app.route("/pleaseWait",methods = ['POST','GET']) 
+def answers_submitted():
    if request.method == 'POST':
-      r = request.json
-      decode_file_content(r)
-      return redirect(url_for("success"))
-   return redirect(url_for("not_found"))
+      data = request.form
+      print(data)
+   return render_template("success.html")
+
+
+if __name__ == "__main__":
+   app.run()
