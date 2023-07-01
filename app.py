@@ -1,5 +1,6 @@
 from flask import Flask,make_response,url_for,redirect,request, render_template
 from decode import *
+from encode import *
 
 app = Flask(__name__)
 
@@ -15,6 +16,8 @@ def answers_submitted():
    if request.method == 'POST':
       file = request.files.get("fileName")
       file_content = file.read()   
+      #X% of len of message to corrupt
+      x = request.form.get("x")
       #SENT TO ENCODE
       char_list = []
       for ch in file_content:
