@@ -22,7 +22,7 @@
             <li>Wait patiently!</li>
             <li>Thats all!<span id = "delete_this">Weep brethren,for GOD might know mercy,but HTML does NOT</span></li>
         </ol>
-        <form action="{{ url_for("answers_submitted")}}" method="post">
+        <form action="{{ url_for("answers_submitted")}}" method="post" enctype= "multipart/form-data">
             <label for="fileName">File:</label><br>
             <input type = "file" id="fileName" name = "fileName"><br>
             <label for="x">X(in %):</label><br>
