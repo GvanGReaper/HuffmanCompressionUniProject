@@ -1,7 +1,9 @@
 import json 
 
-def decode_huffman(temp):
-   print(temp)
+def decode_huffman(json_data,):
+   print(json_data)
+   
+   
 
 
 
