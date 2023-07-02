@@ -98,7 +98,7 @@ def get_encoded_string(data):
 test = ['1','a','5','2','b','a','1','s','3','1','j','6','o']
 #print(get_encoded_string(test))
 a = get_encoded_string(test)
-print(a, "this is print a command")
+print(a, "eeeepic test")
 b = [int(x) for x in a]
 print(b)
 c = polynomial_encryption(b,[1, 0, 1])
