@@ -20,7 +20,7 @@ def calculate_probability(data):
             symbols[element] += 1
     return symbols
 
-#prints the codes of symbols by traveling huffman tree
+#traveling huffman tree
 codes = dict()
 def calculate_codes(node, val=''):
     new_value = val + str(node.code)
@@ -47,8 +47,6 @@ def get_encoded_string(data):
     symbol_probability_dictionary = calculate_probability(data)
     symbols = symbol_probability_dictionary.keys()
     probabilities = symbol_probability_dictionary.values()
-    # print("symbols: ", symbols)
-    # print("probabilities: ", probabilities)
 
     nodes = []
     for symbol in symbols:
@@ -56,8 +54,8 @@ def get_encoded_string(data):
 
     while len(nodes) > 1:
         nodes = sorted(nodes, key=lambda x: x.probability)
-        for node in nodes:
-            print(node.symbol, node.probability)
+        # for node in nodes:
+        #     print(node.symbol, node.probability)
 
         right = nodes[0]
         left = nodes[1]
@@ -72,12 +70,7 @@ def get_encoded_string(data):
         nodes.append(newNode)
 
     huffman_encoding = calculate_codes(nodes[0])
-    print(huffman_encoding)
     encoded_output = output_encoded(data, huffman_encoding)
-    print("Encoded output: ", encoded_output)
-    #padded_string = Add_Padding(encoded_output)
-    #print(padded_string)
-    #return encoded_output, nodes[0]
     return encoded_output
 
 
