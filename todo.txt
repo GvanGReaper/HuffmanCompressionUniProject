@@ -6,7 +6,7 @@
     -Converts to binary representation
     -Add padding
     -Adds random error at X% of len(X is given from user and converted to base64)
-    -Sents JSON to server
+    -Sends JSON to server
 
 3.SERVER LOGIC:
     -DECODES THE MESSAGE
