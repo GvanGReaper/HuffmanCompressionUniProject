@@ -1,3 +1,7 @@
+import random
+import hashlib
+#import json
+
 class HuffmanNode:
     def __init__(self, probability, symbol, left=None, right=None):
         self.probability = probability
@@ -19,14 +23,14 @@ def calculate_probability(data):
 #prints the codes of symbols by traveling huffman tree
 codes = dict()
 def calculate_codes(node, val=''):
-    newVal = val + str(node.code)
+    new_value = val + str(node.code)
 
     if node.left:
-        calculate_codes(node.left, newVal)
+        calculate_codes(node.left, new_value)
     if node.right:
-        calculate_codes(node.right, newVal)
+        calculate_codes(node.right, new_value)
     if not node.left and not node.right:
-        codes[node.symbol] = newVal
+        codes[node.symbol] = new_value
     return codes
 
 #obtaining the encoded output
@@ -37,17 +41,6 @@ def output_encoded(data, coding):
         encoding_output.append(coding[c])
     string = ''.join([str(item) for item in encoding_output])
     return string
-
-#encrypts the encoded data using a generator polynomial
-#using the polynomial key to perform xor encryption
-def polynomial_encryption(data, key):
-    encrypted_data = []
-    key_length = len(key)
-    for i, symbol in enumerate(data):
-        key_index = i % key_length
-        encrypted_symbol = symbol ^ key[key_index]
-        encrypted_data.append(encrypted_symbol)
-    return encrypted_data
 
 #getting the encoded data as a string
 def get_encoded_string(data):
@@ -82,24 +75,69 @@ def get_encoded_string(data):
     print(huffman_encoding)
     encoded_output = output_encoded(data, huffman_encoding)
     print("Encoded output: ", encoded_output)
-    #padded_string = Add_Padding(encoded_output, 8)
+    #padded_string = Add_Padding(encoded_output)
     #print(padded_string)
     #return encoded_output, nodes[0]
     return encoded_output
 
 
-# def Add_Padding(binary_string, block_size):
-#     padding_length = block_size - (len(binary_string) % block_size)
-#     padding = "0" * padding_length
-#     padded_string = binary_string + padding
-#     return padded_string
+#padding for the cyclic code to work properly
+#!block size equal to the degree of the polynomial
+def add_padding(binary_string, block_size):
+    padding_length = block_size - (len(binary_string) % block_size)
+    padding = [0] * padding_length
+    padded_string = binary_string + padding
+    return padded_string
 
 
-test = ['1','a','5','2','b','a','1','s','3','1','j','6','o']
-#print(get_encoded_string(test))
-a = get_encoded_string(test)
-print(a, "this is print a command")
-b = [int(x) for x in a]
-print(b)
-c = polynomial_encryption(b,[1, 0, 1])
-print(c)
+#random degree for polynomial
+def polynomial_degree_generator(max_degree):
+    degree = random.randint(4,max_degree)
+    return degree
+
+#random polynomial generator
+def polynomial_generator(degree):
+    polynomial = [1,]
+    for i in range(degree+1):
+        coefficient = random.randint(0,1)
+        polynomial.append(coefficient)
+    return polynomial
+
+#!doesn't work properly
+def cyclic_encoding(data):
+    max_degree = 16
+    degree = polynomial_degree_generator(max_degree)
+    polynomial = polynomial_generator(degree)
+    padded_data = add_padding(data, degree)
+    encoded_data = padded_data + [0] * (degree - 1)
+
+    length = len(encoded_data)
+    while length >= degree:
+        first_divisible_digit = None
+        for i, digit in enumerate(encoded_data):
+            if digit:
+                first_divisible_digit = i
+                break
+
+        if first_divisible_digit is not None:
+            if first_divisible_digit + degree <= length:
+                for i in range(degree):
+                    encoded_data[first_divisible_digit + i] ^= polynomial[i]
+            else:
+                break
+        else:
+            break
+        encoded_data += encoded_data[-(degree - 1):]
+        length -=1
+    decoded_data = encoded_data[:len(data)]
+    return decoded_data
+
+def reed_solomon():
+    pass
+
+#sha256 hashing
+def calculate_hash(data):
+    hash = hashlib.sha256()
+    hash.update(data.encode('utf-8'))
+    hash_value = hash.hexdigest()
+    return hash_value
