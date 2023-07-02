@@ -141,3 +141,10 @@ def calculate_hash(data):
     hash.update(data.encode('utf-8'))
     hash_value = hash.hexdigest()
     return hash_value
+
+#sha256 hashing
+def calculate_hash(data):
+    hash = hashlib.sha256()
+    hash.update(data.encode('utf-8'))
+    hash_value = hash.hexdigest()
+    return hash_value
